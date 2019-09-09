@@ -7,24 +7,26 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 RST='\033[0m'
 
-read -p "${YELLOW}Install Wifi Hotspot? (Y/n)${RST} " -n 1 -r
+echo -n -e "${YELLOW}Install Wifi Hotspot? (Y/n)${RST} "
+read -n 1 -r
 echo
 if [[ ! $REPLY =~ ^[Nn]$ ]]
 then
 	./hotspot.sh
 else
-	read -p "${YELLOW}Update apt repositories? (Y/n)${RST} " -n 1 -r
+	echo -n -e "${YELLOW}Update apt repositories? (Y/n)${RST} "
+	read -n 1 -r
 	echo
 	if [[ ! $REPLY =~ ^[Nn]$ ]]
 	then
-		sudo apt-get update
+		sudo apt-get -y update
 	fi
 fi
 
 
 ####### TOR ########
 echo -e "\n${BLUE}[*] Installing and configuring tor${RST}"
-sudo apt-get install tor
+sudo apt-get -y install tor
 sudo cp torrc /etc/tor/torrc
 
 
